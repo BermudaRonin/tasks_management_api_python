@@ -129,3 +129,4 @@ REST_FRAMEWORK = {
     ],
 }
 
+ALLOWED_HOSTS = ['*']
