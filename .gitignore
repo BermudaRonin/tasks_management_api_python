@@ -1,0 +1,89 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+*.venv
+venv/
+env/
+env.bak/
+*.sqlite3
+db.sqlite3
+
+# Django Migrations
+**/migrations/*
+!**/migrations/__init__.py
+
+# Logs
+*.log
+*.out
+*.err
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Virtual Environments
+*.venv/
+venv/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# PyCharm
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Deployment
+*.bak
+*.orig
+*.rej
+
+# Media & Static
+/static/
+/media/
+
+# Node (if frontend in project)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Testing
+.coverage
+.tox/
+.nox/
+.pytest_cache/
+celerybeat-schedule
+__coverage__/
+.coverage.*
+
+# Secrets
+config/settings/*.json
+config/settings/*.pyc
+
+# Docker
+*.dockerignore
+docker-compose.override.yml
+
+# Misc
+*.bak
+*.backup
+*.tmp
+*.temp
+*.pid
+*.seed
+
+# OS Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
