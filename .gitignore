@@ -88,5 +88,8 @@ docker-compose.override.yml
 Thumbs.db
 ehthumbs.db
 
+# Static files
+staticfiles/
+
 # Vercel
 .vercel
