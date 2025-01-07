@@ -3,10 +3,12 @@ from django.utils.timezone import now
 from django.contrib.auth.hashers import make_password
 
 from .models import Task, User
-from .utils import TaskValidator
-
+from api.utils import validate
 
 class UserSerializer(ModelSerializer):
+    '''
+    Serializer for User model
+    '''
     class Meta:
         model = User
         fields = ["id", "username", "email", "password"]
@@ -18,37 +20,31 @@ class UserSerializer(ModelSerializer):
 
 
 class TaskSerializer(ModelSerializer):
+    '''
+    Serializer for Task model
+    '''
     class Meta:
         model = Task
-        fields = [
-            "id",
-            "title",
-            "description",
-            "category",
-            "priority",
-            "deadline",
-            "status",
-            "completion_date",
-            "owner",
-        ]
+        fields = ["id", "title", "description", "category", "priority", "deadline", "status", "completion_date", "owner"]
         read_only_fields = ["completion_date", "owner"]
 
+    # Validate task fields, title is already validated by model
     def validate(self, next):
         deadline = next.get("deadline")
         status = next.get("status")
         priority = next.get("priority")
         category = next.get("category")
 
-        if deadline and TaskValidator.deadline(deadline):
+        if deadline and validate.task_deadline(deadline):
             raise ValidationError("Deadline must be in the future.")
 
-        if status and not TaskValidator.status(status):
+        if status and not validate.task_status(status):
             raise ValidationError("Invalid status")
 
-        if priority and not TaskValidator.priority(priority):
+        if priority and not validate.task_priority(priority):
             raise ValidationError("Invalid priority")
 
-        if category and not TaskValidator.category(category):
+        if category and not validate.task_category(category):
             raise ValidationError("Invalid category")
 
         return next
@@ -61,6 +57,7 @@ class TaskSerializer(ModelSerializer):
 
     def update(self, instance, validated_data):
         # Update completion_date on status change
+
         if validated_data.get("status") == Task.Status.COMPLETED:
             validated_data["completion_date"] = now()
 
