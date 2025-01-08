@@ -79,23 +79,25 @@ def delete_task(task):
     task.delete()
     return respond.deleted_data()
 
-def get_tasks(query_params):
+def get_tasks(request):
     """
     Retrieve a list of tasks filtered and sorted by query parameters.
     
     Args:
-        query_params (dict): Query parameters for filtering and sorting tasks.
+        request (Request): Incoming HTTP request containing query parameters for filtering and sorting tasks.
         
     Returns:
         Response: List of retrieved tasks or validation error.
     """
-    filters, filters_error = validate.tasks_query_filters(query_params)
-    sort, sort_error = validate.tasks_query_sort(query_params)
+    filters, filters_error = validate.tasks_query_filters(request.query_params)
+    sort, sort_error = validate.tasks_query_sort(request.query_params)
     
+
     if filters_error or sort_error:
         return respond.validation_error(filters_error or sort_error)
     
-    tasks = Task.objects.filter(**filters).select_related("owner")
+    tasks = Task.objects.filter(owner=request.user, **filters)
+    
     if sort:
         tasks = tasks.order_by(sort)
     

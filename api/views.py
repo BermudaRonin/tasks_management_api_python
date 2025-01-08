@@ -30,7 +30,6 @@ def authentication(request, param=None):
             # Invalid param
             return respond.bad_request("Invalid param")
 
-
 @api_view(["GET", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def user_details(request):
@@ -52,21 +51,18 @@ def user_details(request):
             # Delete the user
             return user_service.delete_user(user)
 
-
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def tasks_list(request):
     """
     Handle task creation and listing.
     """
-
     if request.method == "POST":
         # Create a new task
         return task_service.create_task(request)
-    else :
+    else:
         # List all tasks
-        return task_service.get_tasks(request.query_params)
-
+        return task_service.get_tasks(request)
 
 @api_view(["GET", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
@@ -74,7 +70,6 @@ def task_details(request, id, param=None):
     """
     Handle task retrieval, update, and deletion.
     """
-
     # Ensure task belongs to the authenticated user
     task = get_object_or_404(Task, id=id, owner=request.user)
 
