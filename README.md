@@ -249,7 +249,7 @@ If the request cannot be processed due to errors (e.g., invalid data, unauthoriz
             <td><code>/user/register</code></td>
             <td>🌐</td>
             <td><code>201</code></td>
-            <td><code>400</code>, <code>409</code></td>
+            <td><code>400 - Invalid</code></td>
         </tr>
         <tr>
             <td>Logs in an existing user</td>
@@ -257,13 +257,13 @@ If the request cannot be processed due to errors (e.g., invalid data, unauthoriz
             <td><code>/user/login</code></td>
             <td>🌐</td>
             <td><code>200</code></td>
-            <td><code>400</code>, <code>401</code></td>
+            <td><code>400 - Invalid</code>, <code>404 - Incorrect</code></td>
         </tr>
         <tr>
             <td rowspan="3">User</td>
             <td>Retrieves user details</td>
             <td><code>GET</code></td>
-            <td><code>/user</code></td>
+            <td ><code>/user</code></td>
             <td>🔒</td>
             <td><code>200</code></td>
             <td><code>404</code>, <code>401</code></td>
