@@ -6,6 +6,29 @@ from .models import User, Task
 from .services import user_service, task_service
 from .utils import respond
 
+@api_view(["GET"])
+def endpoints(request):
+    """
+    List available endpoints.
+    """
+    return respond.retreived_data({
+        "User Endpoints": {
+            "Register a new user": "POST /user/register",
+            "Login to access the API": "POST /user/login",
+            "Retrieval of own user's profile": "GET /user/{id}",
+            "Update own user information": "PUT /user/{id}",
+            "Delete own user account": "DELETE /user/{id}",
+        },
+        "Task Endpoints": {
+            "Creation of tasks": "POST /tasks",
+            "Listing of tasks": "GET /tasks",
+            "Retrieval of a task": "GET /task/{id}",
+            "Update of a task": "PUT /task/{id}",
+            "Deletion of a task": "PUT /task/{id}",
+            "Mark task as completed": "PUT /task/{id}/complete",
+            "Mark task as pending": "PUT /task/{id}/pending",
+        }
+    })
 
 @api_view(["POST"])
 def authentication(request, param=None):
