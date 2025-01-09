@@ -13,7 +13,7 @@ def updated_data():
     return Response(status=HTTP_204_NO_CONTENT)
 
 def deleted_data():
-    return Response(HTTP_204_NO_CONTENT)
+    return Response(status=HTTP_204_NO_CONTENT)
 
 # Error responses
 

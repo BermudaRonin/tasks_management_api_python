@@ -120,5 +120,5 @@ def _update_task(task, updated_data):
     serializer = TaskSerializer(task, data=updated_data, partial=True)
     if serializer.is_valid():
         serializer.save()
-        return respond.updated_data(serializer.data)
+        return respond.updated_data()
     return respond.validation_error(serializer.errors)
